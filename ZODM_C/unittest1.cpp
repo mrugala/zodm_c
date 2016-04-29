@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "matrix.h"
+#include "zodm.h"
 #include "CppUnitTest.h"
+
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -50,7 +54,7 @@ namespace ZODM_C
 			for (int i(0); i < 9; i++)
 			{
 				val++;
-				Assert::AreEqual(val, *access_matrix_field(&mat, i / 3, i % 3));
+				Assert::AreEqual(val, *access_matrix_cell(&mat, i / 3, i % 3));
 			}
 		}
 
@@ -58,10 +62,10 @@ namespace ZODM_C
 		{
 			matrix_t mat = matrix3x3();
 
-			Assert::AreEqual((float)4.0, *access_matrix_field(&mat, 1, 0));
-			float* tmp = access_matrix_field(&mat, 1, 0);
+			Assert::AreEqual((float)4.0, *access_matrix_cell(&mat, 1, 0));
+			float* tmp = access_matrix_cell(&mat, 1, 0);
 			*tmp = 5;
-			Assert::AreEqual((float)5.0, *access_matrix_field(&mat, 1, 0));
+			Assert::AreEqual((float)5.0, *access_matrix_cell(&mat, 1, 0));
 		}
 
 		TEST_METHOD(CanAddMatrices)
@@ -76,7 +80,21 @@ namespace ZODM_C
 			for (int i(0); i < 9; i++)
 			{
 				val++;
-				Assert::AreEqual(val, *access_matrix_field(&result, i / 3, i % 3));
+				Assert::AreEqual(val, *access_matrix_cell(&result, i / 3, i % 3));
+			}
+		}
+
+		TEST_METHOD(CanSubtractMatrices)
+		{
+			matrix_t mat1 = matrix3x3();
+			matrix_t mat2 = matrix3x3_of_ones();
+			matrix_t result = { 0 };
+
+			Assert::AreEqual(0, subtract_matrices(&mat1, &mat2, &result));
+
+			for (int i(0); i < 9; i++)
+			{
+				Assert::AreEqual((float)i, *access_matrix_cell(&result, i / 3, i % 3));
 			}
 		}
 
@@ -86,7 +104,7 @@ namespace ZODM_C
 			matrix_t mat2 = matrix3x4();
 			matrix_t result = { 0 };
 
-			Assert::AreEqual((int)DIM_B_ERROR, add_matrices(&mat1, &mat2, &result));
+			Assert::AreEqual(2, add_matrices(&mat1, &mat2, &result));
 		}
 
 		TEST_METHOD(CantMultiplyMatricesWithDifferentInnerDimmensions)
@@ -95,7 +113,7 @@ namespace ZODM_C
 			matrix_t mat2 = matrix3x3();
 			matrix_t result = { 0 };
 
-			Assert::AreEqual((int)DIM_ERROR_MULT, multiply_matrices(&mat1, &mat2, &result));
+			Assert::AreEqual(3, multiply_matrices(&mat1, &mat2, &result));
 		}
 
 		TEST_METHOD(CanMultiplyMatricesOfDifferentSizes)
@@ -109,16 +127,27 @@ namespace ZODM_C
 			Assert::AreEqual(4, result.a);
 			Assert::AreEqual(5, result.b);
 
-			float val_array[] = { 46, 52, 58, 64, 70,
+			float val_array[] = { 46,  52,  58,  64,  70,
 								  100, 115, 130, 145, 160,
 								  154, 178, 202, 226, 250,
 								  208, 241, 274, 307, 340 };
 		
 			for (int i(0); i < 20; i++)
 			{
-				Assert::AreEqual(val_array[i], *access_matrix_field(&result, i / 5, i % 5));
+				Assert::AreEqual(val_array[i], *access_matrix_cell(&result, i / 5, i % 5));
 			}
 		}
+	};
 
+	TEST_CLASS(ZODMTest1)
+	{
+	public:
+		TEST_METHOD(CanAssertFloatEquality)
+		{
+			Assert::AreEqual(true, assert_equal_f((float)5.01, (float)5.001, (float)0.1));
+			Assert::AreEqual(true, assert_equal_f((float)5.1, (float)5.001, (float)0.1));
+			Assert::AreEqual(false, assert_equal_f((float)5.11, (float)5.001, (float)0.1));
+			Assert::AreEqual(true, assert_equal_f((float)5.0001, (float)5.00001, (float)0.0001));
+		}
 	};
 }
