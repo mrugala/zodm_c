@@ -6,6 +6,11 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
+namespace Microsoft {namespace VisualStudio {namespace CppUnitTestFramework	{
+	template<> static std::wstring ToString<matrix_error_t>(const matrix_error_t& t) { return ToString((int)t); }
+	template<> static std::wstring ToString<zodm_error_t>(const zodm_error_t& t)     { return ToString((int)t); }
+}}}
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace ZODM_C
@@ -68,13 +73,20 @@ namespace ZODM_C
 			Assert::AreEqual((float)5.0, *access_matrix_cell(&mat, 1, 0));
 		}
 
+		TEST_METHOD(CantAccessCellOutsideMatrixBoundaries)
+		{
+			matrix_t mat = matrix3x3();
+
+			Assert::AreEqual((float*)NULL, access_matrix_cell(&mat, 4, 0));
+		}
+
 		TEST_METHOD(CanAddMatrices)
 		{
 			matrix_t mat1 = matrix3x3();
 			matrix_t mat2 = matrix3x3_of_ones();
 			matrix_t result = { 0 };
 
-			Assert::AreEqual(0, add_matrices(&mat1, &mat2, &result));
+			Assert::AreEqual(RETURN_OK, add_matrices(&mat1, &mat2, &result));
 
 			float val = 1;
 			for (int i(0); i < 9; i++)
@@ -90,7 +102,7 @@ namespace ZODM_C
 			matrix_t mat2 = matrix3x3_of_ones();
 			matrix_t result = { 0 };
 
-			Assert::AreEqual(0, subtract_matrices(&mat1, &mat2, &result));
+			Assert::AreEqual(RETURN_OK, subtract_matrices(&mat1, &mat2, &result));
 
 			for (int i(0); i < 9; i++)
 			{
@@ -104,7 +116,7 @@ namespace ZODM_C
 			matrix_t mat2 = matrix3x4();
 			matrix_t result = { 0 };
 
-			Assert::AreEqual(2, add_matrices(&mat1, &mat2, &result));
+			Assert::AreEqual(DIM_B_ERROR, add_matrices(&mat1, &mat2, &result));
 		}
 
 		TEST_METHOD(CantMultiplyMatricesWithDifferentInnerDimmensions)
@@ -113,7 +125,7 @@ namespace ZODM_C
 			matrix_t mat2 = matrix3x3();
 			matrix_t result = { 0 };
 
-			Assert::AreEqual(3, multiply_matrices(&mat1, &mat2, &result));
+			Assert::AreEqual(DIM_ERROR_MULT, multiply_matrices(&mat1, &mat2, &result));
 		}
 
 		TEST_METHOD(CanMultiplyMatricesOfDifferentSizes)
@@ -122,7 +134,7 @@ namespace ZODM_C
 			matrix_t mat2 = matrix3x5();
 			matrix_t result = { 0 };
 
-			Assert::AreEqual(0, multiply_matrices(&mat1, &mat2, &result));
+			Assert::AreEqual(RETURN_OK, multiply_matrices(&mat1, &mat2, &result));
 			
 			Assert::AreEqual(4, result.a);
 			Assert::AreEqual(5, result.b);

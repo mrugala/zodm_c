@@ -6,6 +6,8 @@
 #pragma once
 
 #include "targetver.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 // Headers for CppUnitTest
 #include "CppUnitTest.h"

@@ -13,6 +13,22 @@ typedef struct
 	float gamma_deg;
 } input_data_t;
 
-int calculate_zodm_5(input_data_t* input, float q_vect[/*static*/ 5]);
+#define ZODM_ERROR_CODE(x) \
+		x(ZODM_RETURN_OK) \
+		x(NULL_INPUT_ERROR) \
+		x(NULL_Q_VECT_ERROR) \
+		x(ZODM_ROTATION_ERROR) \
+		x(ZODM_TOP) \
+
+#define C(x) x,
+
+typedef enum
+{
+	ZODM_ERROR_CODE(C)
+} zodm_error_t;
+
+#undef C
+
+zodm_error_t calculate_zodm_5(input_data_t* input, float q_vect[/*static*/ 5]);
 
 bool assert_equal_f(float a, float b, float epsilon);

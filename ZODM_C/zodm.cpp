@@ -6,25 +6,10 @@
 #define _USE_MATH_DEFINES
 #include "math.h"
 
-#define ERROR_CODE(x) \
-		x(RETURN_OK) \
-		x(NULL_INPUT_ERROR) \
-		x(NULL_Q_VECT_ERROR) \
-		x(ROTATION_ERROR) \
-		x(TOP) \
-
-#define C(x) x,
-
-typedef enum
-{
-	ERROR_CODE(C)
-} zodm_error_t;
-
-#undef C
 #define C(x) #x,
 
 static const char* zodm_error_str[] = {
-	ERROR_CODE(C)
+	ZODM_ERROR_CODE(C)
 };
 
 #undef C
@@ -51,7 +36,7 @@ bool assert_equal_f(float a, float b, float epsilon)
 	return (diff < epsilon) && (-diff < epsilon);
 }
 
-int calculate_zodm_5(input_data_t* input, float q_vect[/*static*/ 5])
+zodm_error_t calculate_zodm_5(input_data_t* input, float q_vect[/*static*/ 5])
 {
 	if (!input)
 		return NULL_INPUT_ERROR;
@@ -61,7 +46,7 @@ int calculate_zodm_5(input_data_t* input, float q_vect[/*static*/ 5])
 
 	matrix_t rot = { 0 };
 	if (get_rotation_matrix(input->alpha_deg, input->beta_deg, input->gamma_deg, &rot))
-		return ROTATION_ERROR;
+		return ZODM_ROTATION_ERROR;
 
 	float len = sqrtf(powf(input->x_mm, 2) + powf(input->y_mm, 2) + powf(input->z_mm, 2));
 
@@ -112,5 +97,5 @@ int calculate_zodm_5(input_data_t* input, float q_vect[/*static*/ 5])
 		q_vect[i] *= (180 / (float)M_PI);
 	}
 
-	return RETURN_OK;
+	return ZODM_RETURN_OK;
 }
