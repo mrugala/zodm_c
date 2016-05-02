@@ -1,10 +1,8 @@
 #include "stdafx.h"
-#include "matrix.h"
-#include "zodm.h"
 #include "CppUnitTest.h"
 
 #define _USE_MATH_DEFINES
-#include <math.h>
+#include <cmath>
 
 namespace Microsoft {namespace VisualStudio {namespace CppUnitTestFramework	{
 	template<> static std::wstring ToString<matrix_error_t>(const matrix_error_t& t) { return ToString((int)t); }

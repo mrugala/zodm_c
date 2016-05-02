@@ -1,17 +1,22 @@
-#pragma once
+#ifndef __ZODM_H__
+#define __ZODM_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "matrix.h"
 #include "stdbool.h"
 
-typedef struct
-{
-	float x_mm;
-	float y_mm;
-	float z_mm;
-	float alpha_deg;
-	float beta_deg;
-	float gamma_deg;
-} input_data_t;
+	typedef struct
+	{
+		float x_mm;
+		float y_mm;
+		float z_mm;
+		float alpha_deg;
+		float beta_deg;
+		float gamma_deg;
+	} input_data_t;
 
 #define ZODM_ERROR_CODE(x) \
 		x(ZODM_RETURN_OK) \
@@ -22,13 +27,19 @@ typedef struct
 
 #define C(x) x,
 
-typedef enum
-{
-	ZODM_ERROR_CODE(C)
-} zodm_error_t;
+	typedef enum
+	{
+		ZODM_ERROR_CODE(C)
+	} zodm_error_t;
 
 #undef C
 
-zodm_error_t calculate_zodm_5(input_data_t* input, float q_vect[/*static*/ 5]);
+	zodm_error_t calculate_zodm_5(input_data_t* input, float q_vect[/*static*/ 5]);
 
-bool assert_equal_f(float a, float b, float epsilon);
+	bool assert_equal_f(float a, float b, float epsilon);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /*__ZODM_H__*/

@@ -1,4 +1,9 @@
-#pragma once
+#ifndef __MATRIX_H__
+#define __MATRIX_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct
 {
@@ -32,3 +37,9 @@ float* access_matrix_cell(matrix_t* mat, int i, int j);
 void print_matrix_error(int error_code);
 
 matrix_error_t get_rotation_matrix(float alpha_deg, float beta_deg, float gamma_deg, matrix_t* result);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /*__MATRIX_H__*/
