@@ -6,6 +6,8 @@
 #pragma once
 
 #include "targetver.h"
+#define _USE_MATH_DEFINES
+#include <cmath>
 extern "C" {
 #include "matrix.h"
 #include "zodm.h"
