@@ -314,7 +314,7 @@ namespace ZODM_C
 			float epsilon = 0.001f;
 
 			/*
-			Values taken from calculations.
+			Values taken from calculations. Therefore this test case serves only sanity test functionality.
 			*/
 			float val_array[] = { -.939f, -.006f, .342f,
 								  -.006f, .999f, .001f,
