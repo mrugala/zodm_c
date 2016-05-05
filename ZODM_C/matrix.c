@@ -3,6 +3,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <stdio.h>
+#include <memory.h>
 #include <stdlib.h>
 
 #define C(x) #x,
@@ -16,9 +17,9 @@ static const char* matrix_error_str[] = {
 matrix_t diag(size_t size)
 {
 	matrix_t ret = { size, size, { 0 } };
-	*ret.data = memset(ret.data, 0, size);
+	memset(ret.data, 0, size);
 	int i;
-	for (i = 0; i < size; i++)
+	for (i = 0; i < (int)size; i++)
 		*access_matrix_cell(&ret, i, i) = 1.0f;
 	return ret;
 }
