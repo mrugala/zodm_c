@@ -292,9 +292,9 @@ namespace ZODM_C
 
 			float epsilon = 0.0001f;
 
-			float val_array[] = { 0, 1, 0,
-								  1, 0, 0,
-								  0, 0, -1 };
+			float val_array[] = { 0, 0, 1,
+								  0, -1, 0,
+								  1, 0, 0 };
 
 			for (int i(0); i < 9; i++)
 			{
@@ -316,9 +316,9 @@ namespace ZODM_C
 			/*
 			Values taken from calculations. Therefore this test case serves only sanity test functionality.
 			*/
-			float val_array[] = { -.939f, -.006f, .342f,
-								  -.006f, .999f, .001f,
-								  -.342f, -.001f, -.940f };
+			float val_array[] = { -.066f, .937f, -.342f,
+								  -.998f, -.064f, .016f,
+								  -.006f, .342f, .940f };
 
 			for (int i(0); i < 9; i++)
 			{

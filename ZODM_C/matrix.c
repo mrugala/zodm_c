@@ -331,7 +331,7 @@ matrix_error_t get_rotation_matrix(float alpha_deg, float beta_deg, float gamma_
 	matrix_t rot_y = { 3, 3, { cosf(beta), 0, sinf(beta), 0, 1, 0, -sinf(beta), 0, cosf(beta) } };
 	matrix_t rot_z = { 3, 3, { cosf(gamma), -sinf(gamma), 0, sinf(gamma), cosf(gamma), 0, 0, 0, 1 } };
 
-	if (multiply_matrices(&rot_x, &rot_y, &r) || multiply_matrices(&r, &rot_x, result))
+	if (multiply_matrices(&rot_x, &rot_y, &r) || multiply_matrices(&r, &rot_z, result))
 		return ROTATION_ERROR;
 
 	return RETURN_OK;

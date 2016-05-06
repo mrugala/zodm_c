@@ -96,8 +96,7 @@ zodm_error_t calc_zodm_5_rot(matrix_t* rot, input_coord_t* in_coord, float q_vec
 		q_vect[2] = atan2f(sqrtf(1 - powf(temp, 2)), temp);
 		q_vect[1] = atan2f(in_coord->z_mm, sqrtf(powf(in_coord->x_mm, 2) + powf(in_coord->y_mm, 2)))
 			+ atan2f(ZDH.d4 * sinf(q_vect[2]), ZDH.a2 + ZDH.d4 * cosf(q_vect[2]));
-		q_vect[4] = atan2f(*access_matrix_cell(rot, 2, 0), *access_matrix_cell(rot, 2, 1)) - q_vect[1] 
-			- q_vect[2];
+		q_vect[4] = q124 - q_vect[1] - q_vect[2];
 		printf("przypadek osobliwy");
 	}
 
