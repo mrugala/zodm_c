@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZODM_C", "ZODM_C\ZODM_C.vcxproj", "{945BDDBA-8DDF-4627-84A5-F09E60A2857F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZODM_C_app", "ZODM_C_app\ZODM_C_app.vcxproj", "{C2E0A37D-D815-49E4-BFFA-BBEA02307BE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,8 +15,14 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{945BDDBA-8DDF-4627-84A5-F09E60A2857F}.Debug|Win32.ActiveCfg = Debug|Win32
 		{945BDDBA-8DDF-4627-84A5-F09E60A2857F}.Debug|Win32.Build.0 = Debug|Win32
+		{945BDDBA-8DDF-4627-84A5-F09E60A2857F}.Debug|Win32.Deploy.0 = Debug|Win32
 		{945BDDBA-8DDF-4627-84A5-F09E60A2857F}.Release|Win32.ActiveCfg = Release|Win32
 		{945BDDBA-8DDF-4627-84A5-F09E60A2857F}.Release|Win32.Build.0 = Release|Win32
+		{C2E0A37D-D815-49E4-BFFA-BBEA02307BE4}.Debug|Win32.ActiveCfg = Release|Win32
+		{C2E0A37D-D815-49E4-BFFA-BBEA02307BE4}.Debug|Win32.Build.0 = Release|Win32
+		{C2E0A37D-D815-49E4-BFFA-BBEA02307BE4}.Debug|Win32.Deploy.0 = Release|Win32
+		{C2E0A37D-D815-49E4-BFFA-BBEA02307BE4}.Release|Win32.ActiveCfg = Release|Win32
+		{C2E0A37D-D815-49E4-BFFA-BBEA02307BE4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -35,10 +35,10 @@
     <ClCompile Include="unittest1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="matrix.cpp">
+    <ClCompile Include="matrix.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="zodm.cpp">
+    <ClCompile Include="zodm.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

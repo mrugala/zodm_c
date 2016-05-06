@@ -311,7 +311,6 @@ void print_matrix_error(int error_code)
 	{
 		printf("Invalid error code for matrix error");
 	}
-
 }
 
 matrix_error_t get_rotation_matrix(float alpha_deg, float beta_deg, float gamma_deg, matrix_t* result)
